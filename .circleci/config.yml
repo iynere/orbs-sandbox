@@ -1,0 +1,20 @@
+version: 2.1
+
+orbs:
+  aws-cli: circleci/aws-cli@dev:testing
+
+jobs:
+  test-aws-cli:
+    executor: aws-cli/default
+    steps:
+      - checkout
+      - aws-cli/install
+      - aws-cli/configure:
+          profile-name: testing
+
+workflows:
+  version: 2
+  test-orbs:
+    jobs:
+      - test-aws-cli:
+          context: aws
